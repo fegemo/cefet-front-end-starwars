@@ -19,6 +19,7 @@ main {
 .container {
   transform-origin: 50% 0%;
   transform-style: preserve-3d;
+  /* exercício 0: rotacionando texto */
   transform: rotateX(75deg);
 }
 
