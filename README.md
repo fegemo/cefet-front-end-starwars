@@ -1,7 +1,9 @@
 # Guerras Estelares :stars:
 
-Um página com as intros do melhores filmes _ever_.
+Baixe os [arquivos aqui][download]. Um página com as intros do melhores
+filmes _ever_.
 
+[download]: https://github.com/fegemo/cefet-front-end-starwars/archive/master.zip
 ![Prévia do resultado final](imgs/star-wars.png)
 
 ## Atividade
