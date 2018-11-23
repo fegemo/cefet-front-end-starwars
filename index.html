@@ -9,11 +9,12 @@
   <body>
     <nav id="filmes">
       <ul>
-        <!-- vamos usar esse atributo "data-url-episodio" pra saber para
-             onde devemos fazer a requisição Ajax quando um <li> for clicado -->
-        <li data-url-episodio="http://swapi.co/api/films/4/">Episode I</li>
-        <li data-url-episodio="http://swapi.co/api/films/5/">Episode II</li>
-        <li data-url-episodio="http://swapi.co/api/films/.../">Episode ...</li>
+        <!-- vamos usar esse atributo "data-id-episodio" pra saber para
+             a qual filme cada <li> se refere para saber qual intro carregar
+             quando o <li> for clicado -->
+        <li data-id-episodio="1">Episode I</li>
+        <li data-id-episodio="2">Episode II</li>
+        <li data-id-episodio="X">Episode ...</li>
       </ul>
     </nav>
 

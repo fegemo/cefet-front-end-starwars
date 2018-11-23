@@ -36,7 +36,7 @@ Portanto, coloque uma regra a mais no arquivo `estilos.css`:
 ```
 
 
-### Exercício 1: incluindo jQuery (3 min)
+### Exercício 1 (**opcional**): incluindo jQuery (3 min)
 
 Inclua a biblioteca jQuery (versão mais nova). Isso pode ser feito de
 duas formas:
@@ -61,8 +61,9 @@ Obs.: Professor, posso não usar jQuery? Veja o [FAQ](#faq)
 ![](imgs/exercicio-lista-de-filmes.png)
 
 Agora vamos fazer uma requisição Ajax e pegar lista de filmes Star Wars.
-Com ela em mãos, vamos preencher o `<nav id="filmes"><ul>...</ul></nav>`
-para conter 01 `<li></li>` para cada filme.
+Com seu resultado em mãos, vamos preencher o
+`<nav id="filmes"><ul>...</ul></nav>` para conter 01 `<li></li>` para
+cada filme.
 
 No arquivo `starwars.js`, faça uma chamada Ajax para a URL
 `https://swapi.co/api/films/`. Assim que a resposta chegar, altere a página
@@ -76,10 +77,11 @@ Para saber o quê está sendo retornado na chamada Ajax, você pode:
 
   ![](imgs/vendo-resposta-para-ajax.png)
 
-Deve ser criado um `<li>Episode x: titulo</li>` para cada filme retornado,
-por exemplo: `<li>Episode 4: A New Hope</li>` - descubra quais
-propriedades da resposta que você deve usar. Veja no [FAQ](#faq) para lembrar
-como criar elementos dinamicamente, e como definir o conteúdo HTML deles.
+Deve ser criado um `<li>Episode x: titulo</li>` para cada filme
+retornado, por exemplo: `<li>Episode 4: A New Hope</li>` -
+descubra quais propriedades da resposta que você deve usar. Veja no
+[FAQ](#faq) para lembrar como criar elementos dinamicamente, e como definir
+o conteúdo HTML deles.
 
 **Nota**: Não se preocupe se os filmes ficarem fora de ordem. Você pode
 corrigir isso em um dos desafios.
@@ -87,17 +89,16 @@ corrigir isso em um dos desafios.
 
 ### Exercício 3: alterando a intro para o filme clicado (15 min)
 
-Faça com que, ao clicar em um filme, uma outra chamada Ajax seja feita para
-pegar os detalhes desse filme e, então, atualizar o texto introdutório.
-
-Essa chamada Ajax deve ser feita para a URL `https://swapi.co/api/films/X`,
-onde `X` é um número.
+Faça com que, ao clicar em um filme (`<li data-id="x">...</li>`), uma função
+_callback_ Ajax seja feita para pegar os detalhes desse filme e,
+então, atualizar o texto introdutório.
 
 **Sugestão**: altere o código do exercício 2 para colocar no `<li>nome</li>`,
-um atributo de dados que contenha a URL do filme, de forma que fique assim:
+um atributo de dados que contenha o _episode_id_ do filme, de forma que
+fique assim:
 
 ```html
-<li data-url-episodio="https://swapi.co/api/films/4/">Episode 1: The Phantom Menace</li>
+<li data-id-episodio="1">Episode 1: The Phantom Menace</li>
 ```
 
 Ainda no código do exercício 2, coloque um evento de clique no
@@ -107,7 +108,8 @@ igual ao texto introdutório desse filme (descubra que propriedade usar,
 olhando para a resposta).
 
 Para ficar lindão, você deve colocar, antes do texto da introdução, os
-escritos `"Episode X\n"` e `"O TITULO EM MAIÚSCULAS\n\n"`.
+escritos `"Episode X\n"` e `"O TITULO EM MAIÚSCULAS\n\n"`. Para saber como
+passar todas as letras de uma string para maiúsculas, veja o [Faq](#faq).
 
 
 ### Desafio 1: ordenando os filmes (5 min)
@@ -140,14 +142,20 @@ let audio = new Audio('arquivo-de-audio.mp3');
 audio.play();
 ```
 
+**Observação**: os navegadores não têm permitido mais que músicas comecem a
+tocar em uma página antes de o usuário interagir com ela de alguma forma
+(eg, clicando em algo). Portanto, coloque o código para tocar a música dentro
+de alguma callback de _click_. Cuidado apenas para não começar a tocar a música
+novamente, em caso de mais de 01 clique.
 
 ## FAQ
 
 1. Posso <u>não</u> usar jQuery?
    - Pode sim! É legal porque aí você não fica preso a 01 biblioteca
-     JavaScript em particular. Existem outras similares, como
-     [prototype.js][prototype], [MooTools][mootools], [YUI][yui] etc. Mas bom
-     mesmo é JavaScript =)
+     JavaScript em particular.
+     1. Usar outra biblioteca (procure por ajax em http://microjs.com)
+     1. Usar [XMLHttpRequest][ajax-vanilla-1] diretamente
+     1. Usar [fetch][fetch-api]
 1. Como fazer uma requisição Ajax com jQuery?
    - Primeiramente, lembre-se de incluir o arquivo da biblioteca. Depois:
      ```js
@@ -189,7 +197,7 @@ audio.play();
      let elemento = document.querySelector('elemento');
      elemento.innerHTML = 'novo conteúdo do elemento';
      ```
-1. O que é esse `"data-url-episodio"` em `<li data-url-episodio="...">...</li>`?
+1. O que é esse `"data-id-episodio"` em `<li data-id-episodio="...">...</li>`?
    - Em HTML, podemos "criar" novos atributos com o nome e o valor que quisermos
      - Tipicamente, damos o nome desses novos atributos de `data-algumacoisa`,
        para informar que ele é um atributo "de dados" e não um atributo
@@ -212,10 +220,28 @@ audio.play();
            ```js
            $botao.data('novo-atributo', 'o seu valor');
            ```
-   - Neste caso, **uma ideia é colocar a URL da chamada Ajax a ser feita** para
+   - Neste caso, **uma ideia é colocar o id do filme** para conseguir
      recuperar os detalhes daquele episódio
-     - E quando o elemento for "clicado", recuperar a URL e fazer
-       a chamada Ajax
+     - Quando o elemento for "clicado", recuperar o id do `<li>` que foi alvo
+       do evento de `click` e fazer uma busca no vetor de filmes procurando
+       por aquele que tem o `id` solicitado
+1. Como posso buscar um certo elemento dentro de um vetor?
+   - Todo vetor possui o método `.find(funcao)` que recebe uma _callback_ como
+     parâmetro e a invoca para cada elemento do array, passando o elemento atual
+     como argumento. Essa _callback_ deve retornar `true` se o elemento atual
+     é o elemento sendo buscado, ou `false`, do contrário. Por exemplo:
+     ```js
+     let frutas = ['kiwi', 'morango', 'tomate'];
+
+     // quero encontrar a fruta cujo nome possui 4 letras
+     let fruta4Letras = frutas.find(function(fruta) {
+       return fruta.length === 4;
+     });
+
+     // imprime: 'kiwi'
+     console.log(fruta4Letras);
+     ```
+     - Veja a documentação do [`.find()` na MDN][array-find]
 1. Como colocar uma string em tudo maiúsculo?
    ```js
    'Uma palavra'.toUpperCase() === 'UMA PALAVRA';
@@ -234,3 +260,4 @@ audio.play();
 [ajax-vanilla-1]: https://fegemo.github.io/cefet-front-end/classes/js7/#ajax-vanilla-1
 [ajax-vanilla-2]: https://fegemo.github.io/cefet-front-end/classes/js7/#ajax-vanilla-2
 [array-sort]: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+[array-find]: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/find
