@@ -10,9 +10,9 @@ let filmes = null;
 let musicaTocando = false;
 
 // exercício 2: buscando a lista de filmes usando ajax
-$.ajax('https://swapi.co/api/films/', {
+$.ajax('https://swapi.dev/api/films/', {
   dataType: 'json',
-  success: function(resposta) {
+  success: resposta => {
     let $listaFilmes = $('#filmes ul');
     $listaFilmes.empty();
 
