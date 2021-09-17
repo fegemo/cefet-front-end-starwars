@@ -16,7 +16,7 @@ if (typeof $ !== 'undefined') {
   // disparar apenas se o que for clicado for um <li></li>
   // (isso chama "event delegation")
   //
-  $('#filmes').on('click', 'li', function(e) {
+  $('#filmes').on('click', 'li', e => {
     // remove a classe ".animacao-subindo", que faz o texto subir
     $introTextEl.removeClass('animacao-subindo');
     // define a propriedade visibility como hidden para evitar que o usuário
@@ -25,7 +25,7 @@ if (typeof $ !== 'undefined') {
 
     // daqui 0ms (no próximo "tick" de atualização), devolver a classe
     // ".animacao-subindo" e tornar o texto visível novamente
-    setTimeout(function() {
+    setTimeout(() => {
       $introTextEl.addClass('animacao-subindo');
       $introTextEl.css('visibility', 'visible');
     }, 0);
@@ -40,7 +40,7 @@ else {
   let introTextEl = document.querySelector('.container > pre');
 
   // atribui um evento de clique à <nav id="movies"></nav>
-  document.querySelector('#filmes').addEventListener('click', function(e) {
+  document.querySelector('#filmes').addEventListener('click', e => {
     // queremos apenas cliques cujo alvo foram <li></li>
     if (e.currentTarget.matches('li')) {
       // remove a classe ".animacao-subindo", que faz o texto subir
@@ -51,7 +51,7 @@ else {
 
       // daqui 0ms (no próximo "tick" de atualização), devolver a classe
       // ".animacao-subindo" e tornar o texto visível novamente
-      setTimeout(function() {
+      setTimeout(() => {
         introTextEl.classList.add('animacao-subindo');
         introTextEl.style.visibility = 'visible';
       }, 0);
