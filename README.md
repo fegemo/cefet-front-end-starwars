@@ -3,12 +3,13 @@
 Baixe os [arquivos aqui][download]. Um página com as intros do melhores
 filmes _ever_.
 
-[download]: https://github.com/fegemo/cefet-front-end-starwars/archive/master.zip
+[download]: https://github.com/fegemo/cefet-front-end-starwars/archive/main.zip
 ![Prévia do resultado final](imgs/star-wars.png)
+
 
 ## Atividade
 
-Você deve usar a Star Wars API (http://swapi.co) para poder (a) carregar
+Você deve usar a Star Wars API (http://swapi.dev) para poder (a) carregar
 dinamicamente a lista de filmes e (b) também para exibir o respectivo texto
 introdutório quando o usuário selecionar um filme.
 
@@ -54,6 +55,7 @@ Obs.: Professor, posso não usar jQuery? Veja o [FAQ](#faq)
 
 [jquery-download]: http://jquery.com/download/#downloading-jquery
 [jquery-cdns]: http://jquery.com/download/#using-jquery-with-a-cdn
+
 
 
 ### Exercício 2: buscando a lista de filmes com uma requisição Ajax (15 min)
@@ -118,6 +120,12 @@ Ordene os filmes de forma crescente de acordo com a propriedade `episode_id`.
 Para isso, você pode usar [o método `vetor.sort()`][array-sort] que todo
 vetor possui. Veja a [descrição do método na MDN][array-sort].
 
+Como o vetor de filmes não tem uma ordenação natural (como
+os números ou strings possuem), é necessário passar uma
+função como parâmetro que será responsável por comparar
+2 objetos de filmes. Veja na documentação da MDN como
+implementar essa função.
+
 A ideia é que a lista de filmes fique ordenada do episódio 1 até o último, em
 ordem crescente.
 
@@ -148,14 +156,14 @@ tocar em uma página antes de o usuário interagir com ela de alguma forma
 de alguma callback de _click_. Cuidado apenas para não começar a tocar a música
 novamente, em caso de mais de 01 clique.
 
+
 ## FAQ
 
 1. Posso <u>não</u> usar jQuery?
    - Pode sim! É legal porque aí você não fica preso a 01 biblioteca
      JavaScript em particular.
-     1. Usar outra biblioteca (procure por ajax em http://microjs.com)
      1. Usar [XMLHttpRequest][ajax-vanilla-1] diretamente
-     1. Usar [fetch][fetch-api]
+     1. Usar [fetch][fetch-api] (+recente e preferível!!)
 1. Como fazer uma requisição Ajax com jQuery?
    - Primeiramente, lembre-se de incluir o arquivo da biblioteca. Depois:
      ```js
@@ -209,12 +217,12 @@ novamente, em caso de mais de 01 clique.
        - Podemos, em _vanilla JS_:
          ```js
          let botaoEl = document.querySelector('#maroto');
-         window.alert(botaoEl.dataset.sorriso);
+         alert(botaoEl.dataset.sorriso);
          ```
        - Ou com jQuery:
          ```js
          let $botao = $('#maroto');
-         window.alert($botao.data('sorriso'));
+         alert($botao.data('sorriso'));
          ```
          - E para colocar um novo atributo de dados:
            ```js
@@ -261,3 +269,4 @@ novamente, em caso de mais de 01 clique.
 [ajax-vanilla-2]: https://fegemo.github.io/cefet-front-end/classes/js7/#ajax-vanilla-2
 [array-sort]: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 [array-find]: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/find
+[fetch-api]: https://fegemo.github.io/cefet-front-end/classes/js7/#ajax-fetch
